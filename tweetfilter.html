@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <title>Filter Tweets Bookmarklet</title>
+    <style>
+        .myButton {
+            -moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
+            -webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
+            box-shadow:inset 0px 1px 0px 0px #cf866c;
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d0451b), color-stop(1, #bc3315));
+            background:-moz-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+            background:-webkit-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+            background:-o-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+            background:-ms-linear-gradient(top, #d0451b 5%, #bc3315 100%);
+            background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0451b', endColorstr='#bc3315',GradientType=0);
+            background-color:#d0451b;
+            -moz-border-radius:3px;
+            -webkit-border-radius:3px;
+            border-radius:3px;
+            border:1px solid #942911;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:Arial;
+            font-size:13px;
+            padding:6px 24px;
+            text-decoration:none;
+            text-shadow:0px 1px 0px #854629;
+        }
+        .myButton:hover {
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bc3315), color-stop(1, #d0451b));
+            background:-moz-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+            background:-webkit-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+            background:-o-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+            background:-ms-linear-gradient(top, #bc3315 5%, #d0451b 100%);
+            background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bc3315', endColorstr='#d0451b',GradientType=0);
+            background-color:#bc3315;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Filter Tweets Bookmarklet</h1>
+    <p>
+        <a class="myButton" href="javascript:!function(){var t=function(){$('.js-tweet-text').each(function(t,e){var a=$(e),s=a.text();s&&-1===s.search(/\B#\w\w+/)&&0===a.find('.js-display-url').not('.u-hidden > .js-display-url').length&&a.closest('.js-stream-item').remove()})};t();var e=$('.js-navigable-stream')[0],a={attributes:!1,childList:!0,characterData:!1},s=new MutationObserver(function(e){t()});s.observe(e,a)}();">Filter Tweets</a>
+    </p>
+
+    <h2>What is this?</h2>
+    <p>
+        It's a bookmarklet to filter tweets. If you go to twitter.com and
+        click this bookmarklet, all tweets will be removed from the page
+        which do not contain at least one hashtag or at least one link. As more
+        tweets are loaded into the page, either from infinite scrolling or
+        by clicking the "View new Tweets" link, they will also be filtered.
+    </p>
+
+    <h2>How do I use it?</h2>
+    <p>
+        To install the bookmarklet, drag the red button to your bookmarks
+        toolbar.
+    </p>
+
+    <h2>What is it doing?</h2>
+    <p>Here's the non-minified code:</p>
+    <pre><code>(function() {
+    var filterTweets = function() {
+        $('.js-tweet-text').each(function(i, elem) {
+            var $e = $(elem);
+            var eText = $e.text();
+            
+            if (eText && 
+                eText.search(/\B#\w\w+/) === -1 &&
+                $e.find('.js-display-url').not('.u-hidden > .js-display-url').length === 0)
+            {
+                $e.closest('.js-stream-item').remove();
+            }
+        });
+    };
+    
+    // Filter once when the bookmarklet is clicked
+    filterTweets();
+    
+    // Filter again on all future changes
+    var streamElem = $('.js-navigable-stream')[0];
+    var config = {
+        attributes: false,
+        childList: true,
+        characterData: false
+    };
+    
+    var observer = new MutationObserver(function(mutations) {
+        filterTweets();
+    });
+    observer.observe(streamElem, config);
+})();</code></pre>
+
+    <a href="https://github.com/aag/tweetfilter"><img style="position: absolute; top: 0; right: 0; border: 0;" src="forkme.png" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+
+</body>
+</html>
