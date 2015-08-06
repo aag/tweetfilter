@@ -10,7 +10,7 @@ Developing
 ----------
 All changes to the bookmarklet should be made in `tweetfilter.js`. There is a
 script, `build.pl`, which will minify the code in `tweetfilter.js` and insert
-it into `tweetfilter.html`. To run the build script, first install
+it into `index.html`. To run the build script, first install
 Perl and UglifyJS. Then run `./build.pl`.
 
 License
