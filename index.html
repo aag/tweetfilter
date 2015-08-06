@@ -49,7 +49,7 @@
 <body>
     <h1>Filter Tweets Bookmarklet</h1>
     <p>
-        <a class="myButton" href="javascript:!function(){var t=function(){$('.js-tweet-text').each(function(t,e){var a=$(e),s=a.text();s&&-1===s.search(/\B#\w\w+/)&&0===a.find('.js-display-url').not('.u-hidden > .js-display-url').length&&a.closest('.js-stream-item').remove()})};t();var e=$('.js-navigable-stream')[0],a={attributes:!1,childList:!0,characterData:!1},s=new MutationObserver(function(e){t()});s.observe(e,a)}();">Filter Tweets</a>
+        <a class="myButton" href="javascript:!function(){var t=function(){$('.js-tweet-text').each(function(t,e){var a=$(e),s=a.text();s&&-1===s.search(/\B#\w\w+/)&&0===a.find('.js-display-url').not('.u-hidden > .js-display-url').length&&a.closest('.js-stream-item').remove()})};t();var e=$('.js-navigable-stream')[0],a={attributes:!1,childList:!0,characterData:!1},s=new MutationObserver(function(e){t()});s.observe(e,a)}(); void 0">Filter Tweets</a>
     </p>
 
     <h2>What is this?</h2>

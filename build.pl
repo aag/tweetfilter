@@ -2,7 +2,7 @@
 
 use strict;
 
-print "Building tweetfilter.html ...\n";
+print "Building index.html ...\n";
 
 # Minify JS
 my $minified_js = `uglifyjs tweetfilter.js -c -m --screw-ie8`;
@@ -20,7 +20,7 @@ chomp($orig_js);
 
 # Read in HTML template to string
 my $html = "";
-open HTML_FILE, "tweetfilter.html.tmpl" or die "Couldn't open file: $!"; 
+open HTML_FILE, "index.html.tmpl" or die "Couldn't open file: $!"; 
 while (<HTML_FILE>) {
     $html .= $_;
 }
@@ -47,7 +47,7 @@ if ($orig_script_idx >= 0) {
 }
 
 # Output to the HTML file
-open OUT_FILE, '>', "tweetfilter.html" or die "Couldn't open file: $!";
+open OUT_FILE, '>', "index.html" or die "Couldn't open file: $!";
 print OUT_FILE $html;
 close OUT_FILE;
 
